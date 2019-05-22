@@ -3,7 +3,9 @@ module.exports = {
     sourceMap: true
   },
 
-  publicPath: '/benchmark-addition/',
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/benchmark-addition/'
+    : '/',
   outputDir: 'docs',
   productionSourceMap: false
 }

@@ -23,7 +23,7 @@ export default {
   },
   props: ['items', 'name', 'noruns'],
   mixins: [multipleRun],
-  data() {
+  data: () => {
     return {
       views: 0,
       unique: 0,

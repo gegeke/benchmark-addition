@@ -55,6 +55,7 @@
         </v-layout>
       </v-container>
     </v-content>
+    <app-footer />
   </v-app>
 </template>
 
@@ -66,6 +67,7 @@ import WithWhile from './components/WithWhile'
 import WithForOf from './components/WithForOf'
 import WithForI from './components/WithForI'
 import WithForIOther from './components/WithForIOther'
+import AppFooter from './components/AppFooter'
 
 export default {
   name: 'App',
@@ -76,7 +78,8 @@ export default {
     WithWhile,
     WithForOf,
     WithForI,
-    WithForIOther
+    WithForIOther,
+    AppFooter
   },
   computed: {
     sumTechniques() {
@@ -155,7 +158,7 @@ export default {
     }
   },
   data: () => ({
-      noDataItems: 10000,
+      noDataItems: 50000,
       noRuns: 15,
       jsonData: []
     }),
