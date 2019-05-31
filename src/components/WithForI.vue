@@ -7,13 +7,13 @@
     :totalTime="totalTime"
     :minTime="minTime"
     :maxTime="maxTime"
-    :views="views"
-    :unique="unique"
+    :data1="data1"
     @multiple="runAddition"
   />
 </template>
 
 <script>
+import { addSingle } from "../functions/WithForI"
 import { multipleRun } from "../mixins/multipleRun"
 import CardDisplay from "../components/CardDisplay"
 
@@ -21,11 +21,16 @@ export default {
   components: {
     CardDisplay
   },
-  props: ['items', 'name', 'noruns'],
+  props: ['name', 'noruns'],
   mixins: [multipleRun],
+  computed: {
+    items() {
+      return this.$store.state.itemData
+    }
+  },
   data: () => {
     return {
-      views: 0,
+      data1: 0,
       unique: 0,
       start: 0,
       end: 0
@@ -35,30 +40,13 @@ export default {
     runAddition(val) {
       this.runMultiple(val)
     },
-    addUpMultiple() {
-      let sumViews = 0
-      let sumUnique = 0
-      const itemsLength = this.items.length
-      const sumItems = this.items
-      for(let i = itemsLength; i--;) {
-        sumViews += sumItems[i].view
-        sumUnique += sumItems[i].unique
-      }
-      this.views = sumViews
-      this.unique = sumUnique
-    },
     addUpSingle() {
-      let sumViews = 0
-      const itemsLength = this.items.length
-      const sumItems = this.items
-      for(let i = itemsLength; i--;) {
-        sumViews += sumItems[i].view
-      }
-      this.views = sumViews
+      const self = this
+      addSingle(this.$store.state.itemData, this.$store.state.itemData.length)
+      .then(result => {
+        this.data1 = result
+      })
     }
   }
 }
 </script>
-
-<style lang="css" scoped>
-</style>

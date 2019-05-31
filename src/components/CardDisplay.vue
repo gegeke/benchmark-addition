@@ -3,8 +3,8 @@
     <v-card-title>
       <div>
         <h2>With {{name}}</h2>
-        <h3>Number of runs: {{noruns}}</h3>
-        <h3>Number of items: {{noitems}}</h3>
+        <h3>Number of runs: {{getRunData.noRuns}}</h3>
+        <h3>Number of items: {{getItemDataLength}}</h3>
       </div>
     </v-card-title>
     <v-divider></v-divider>
@@ -14,73 +14,67 @@
         Total time: {{ totalTime }}<br />
         Minimum time: {{ minTime }}<br />
         Maximum time: {{ maxTime }}<br />
-        Views: {{views}}<br />
-        Unique: {{unique}}
+        SUM: {{data1}}<br />
       </div>
     </v-card-title>
-    <v-card-actions>
-      <v-btn
-        block
-        color="secondary"
-        dark
-        @click="runMultiple(false)"
-      >RUN {{name}} TESTS: MULTIPLE</v-btn>
-    </v-card-actions>
     <v-card-actions>
       <v-btn
         block
         color="primary"
         dark
         @click="runMultiple(true)"
-      >RUN {{name}} TESTS: SINGLE</v-btn>
+      >RUN {{name}} TESTS</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-  export default {
-    props: {
-      name: {
-        type: String,
-        default: 'additionType'
-      },
-      noruns: {
-        type: Number,
-        default: 1
-      },
-      noitems: {
-        type: Number,
-        default: 1
-      },
-      averageTime: {
-        type: Number,
-        default: 0
-      },
-      totalTime: {
-        type: Number,
-        default: 0
-      },
-      minTime: {
-        type: Number,
-        default: 0
-      },
-      maxTime: {
-        type: Number,
-        default: 0
-      },
-      views: {
-        type: Number,
-        default: 0
-      },
-      unique: {
-        type: Number,
-        default: 0
-      }
+import { mapGetters } from 'vuex'
+export default {
+  props: {
+    name: {
+      type: String,
+      default: 'additionType'
     },
-    methods: {
-      runMultiple(val) {
-        this.$emit('multiple', val)
-      }
+    noruns: {
+      type: Number,
+      default: 1
+    },
+    noitems: {
+      type: Number,
+      default: 1
+    },
+    averageTime: {
+      type: Number,
+      default: 0
+    },
+    totalTime: {
+      type: Number,
+      default: 0
+    },
+    minTime: {
+      type: Number,
+      default: 0
+    },
+    maxTime: {
+      type: Number,
+      default: 0
+    },
+    data1: {
+      type: Number,
+      default: 0
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'getRunData',
+      'getItemDataLength'
+    ]),
+  },
+  methods: {
+    runMultiple(val) {
+      this.$emit('multiple', val)
     }
   }
+}
 </script>

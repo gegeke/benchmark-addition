@@ -21,8 +21,13 @@ export default {
   components: {
     CardDisplay
   },
-  props: ['items', 'name', 'noruns'],
+  props: ['name', 'noruns'],
   mixins: [multipleRun],
+  computed: {
+    items() {
+      return this.$store.state.itemData
+    }
+  },
   data: () => {
     return {
       views: 0,
@@ -39,7 +44,7 @@ export default {
       let thisViews = 0
       let thisUnique = 0
       _.forEach(this.items, el => {
-        thisViews += el.view
+        thisViews += el.data1
         thisUnique += el.unique
       })
       this.views = thisViews
@@ -48,7 +53,7 @@ export default {
     addUpSingle() {
       let thisViews = 0
       _.forEach(this.items, el => {
-        thisViews += el.view
+        thisViews += el.data1
       })
       this.views = thisViews
     }

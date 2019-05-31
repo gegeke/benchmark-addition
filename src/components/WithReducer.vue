@@ -21,8 +21,13 @@ export default {
   components: {
     CardDisplay
   },
-  props: ['items', 'name', 'noruns'],
+  props: ['name', 'noruns'],
   mixins: [multipleRun],
+  computed: {
+    items() {
+      return this.$store.state.itemData
+    }
+  },
   data: () => {
     return {
       views: 0,
@@ -36,11 +41,11 @@ export default {
       this.runMultiple(val)
     },
     addUpMultiple() {
-      this.views = this.items.reduce((acc, curr) => {return acc + curr.view}, 0)
+      this.views = this.items.reduce((acc, curr) => {return acc + curr.data1}, 0)
       this.unique = this.items.reduce((acc, curr) => {return acc + curr.unique}, 0)
     },
     addUpSingle() {
-      this.views = this.items.reduce((acc, curr) => {return acc + curr.view}, 0)
+      this.views = this.items.reduce((acc, curr) => {return acc + curr.data1}, 0)
     }
   }
 }

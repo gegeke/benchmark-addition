@@ -21,7 +21,7 @@ export default {
   components: {
     CardDisplay
   },
-  props: ['items', 'name', 'noruns'],
+  props: ['name', 'noruns'],
   mixins: [multipleRun],
   data: () => {
     return {
@@ -31,16 +31,24 @@ export default {
       end: 0
     }
   },
+  computed: {
+    items() {
+      return this.$store.state.itemData
+    }
+  },
   methods: {
-    runAddition(val) {
-      this.runMultiple(val)
+    runAddition(isSingle) {
+      this.runMultiple(isSingle)
+      .then(res => {
+        console.log(res)
+      })
     },
     addUpMultiple() {
-      this.views = _.sumBy(this.items, el => {return el.view})
+      this.views = _.sumBy(this.items, el => {return el.data1})
       this.unique = _.sumBy(this.items, el => {return el.unique})
     },
     addUpSingle() {
-      this.views = _.sumBy(this.items, el => {return el.view})
+      this.views = _.sumBy(this.items, el => {return el.data1})
     }
   }
 }

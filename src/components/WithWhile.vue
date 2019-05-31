@@ -21,8 +21,13 @@ export default {
   components: {
     CardDisplay
   },
-  props: ['items', 'name', 'noruns'],
+  props: ['name', 'noruns'],
   mixins: [multipleRun],
+  computed: {
+    items() {
+      return this.$store.state.itemData
+    }
+  },
   data: () => {
     return {
       views: 0,
@@ -42,7 +47,7 @@ export default {
       let i = sumItems.length
       while(i--) {
         let thisItem = sumItems[i]
-        sumView += thisItem.view
+        sumView += thisItem.data1
         sumUnique += thisItem.unique
       }
       this.views = sumView
@@ -54,7 +59,7 @@ export default {
       let i = sumItems.length
       while(i--) {
         let thisItem = sumItems[i]
-        sumView += thisItem.view
+        sumView += thisItem.data1
       }
       this.views = sumView
     }
