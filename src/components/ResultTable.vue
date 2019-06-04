@@ -171,8 +171,6 @@ export default {
           if (!this.evalSumFunction(funcName)) {
             return false
           }
-          // this.componentKey = funcName
-          // this.$forceUpdate()
 
           const avgTime = await this.runCaclulation(funcName, this.$store.state.itemData, this.noRuns)
 
