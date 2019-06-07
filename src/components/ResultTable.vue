@@ -13,6 +13,7 @@
       ></v-progress-linear>
       <template v-slot:items="results">
         <td>{{ results.item.noItems }}</td>
+        <td class="text-xs-right">{{ results.item['addWithDuffsDevice'] }}</td>
         <td class="text-xs-right">{{ results.item['addWithForEach'] }}</td>
         <td class="text-xs-right">{{ results.item['addWithForI'] }}</td>
         <td class="text-xs-right">{{ results.item['addWithForIOther'] }}</td>
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+import { addSingle as addWithDuffsDevice } from '../functions/WithDuffsDevice'
 import { addSingle as addWithForEach } from '../functions/WithForEach'
 import { addSingle as addWithForI } from '../functions/WithForI'
 import { addSingle as addWithForIOther } from '../functions/WithForIOther'
@@ -67,7 +69,6 @@ export default {
         450000,
         475000,
         500000,
-
         525000,
         550000,
         575000,
@@ -76,7 +77,6 @@ export default {
         650000,
         675000,
         700000,
-
         725000,
         750000,
         775000,
@@ -98,6 +98,7 @@ export default {
           sortable: true,
           value: 'noItems'
         },
+        { text: 'Duff\'s Device', value: 'addWithDuffsDevice' },
         { text: 'forEach', value: 'addWithForEach' },
         { text: 'For I++', value: 'addWithForI' },
         { text: 'For I--', value: 'addWithForIOther' },
@@ -120,19 +121,22 @@ export default {
         // }
       ],
       functionNames: [
+        'addWithDuffsDevice',
         'addWithForEach',
-        'addWithForI',
-        'addWithForIOther',
-        'addWithForOf',
-        'addWithLodashForEach',
-        'addWithLodashSumBy',
-        'addWithReducer',
-        'addWithWhile'
+        // 'addWithForI',
+        // 'addWithForIOther',
+        // 'addWithForOf',
+        // 'addWithLodashForEach',
+        // 'addWithLodashSumBy',
+        // 'addWithReducer',
+        // 'addWithWhile'
       ],
       componentKey: 'startKey'
     }
   },
   methods: {
+    addWithDuffsDevice,
+    addWithForEach,
     addWithForI,
     addWithForIOther,
     addWithForOf,
@@ -172,7 +176,7 @@ export default {
             return false
           }
 
-          const avgTime = await this.runCaclulation(funcName, this.$store.state.itemData, this.noRuns)
+          const avgTime = await this.runCalculation(funcName, this.$store.state.itemData, this.noRuns)
 
           console.log(funcName + ' ' + noItemsVector[i] + ':', avgTime)
           tableRow[funcName] = avgTime
@@ -196,7 +200,7 @@ export default {
 
         resolve(Number(calcTimes.reduce((acc, curr) => {return acc + curr})/calcTimes.length).toFixed(2))
       })
-    }
+    },
     // injecting functions by name (string)
     // source: https://stackoverflow.com/questions/912596/how-to-turn-a-string-into-a-javascript-function-call
     evalSumFunction(str) {
