@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+// import _ from 'lodash'
 import { addSingle as addWithDuffsDevice } from '../functions/WithDuffsDevice'
 import { addSingle as addWithForEach } from '../functions/WithForEach'
 import { addSingle as addWithForI } from '../functions/WithForI'
@@ -55,38 +55,38 @@ export default {
         150000,
         175000,
         200000,
-        225000,
-        250000,
-        275000,
-        300000,
-        325000,
-        350000,
-        375000,
-        400000,
-        425000,
-        450000,
-        475000,
-        500000,
-        525000,
-        550000,
-        575000,
-        600000,
-        625000,
-        650000,
-        675000,
-        700000,
-        725000,
-        750000,
-        775000,
-        800000,
-        825000,
-        850000,
-        875000,
-        900000,
-        925000,
-        950000,
-        975000,
-        1000000
+        // 225000,
+        // 250000,
+        // 275000,
+        // 300000,
+        // 325000,
+        // 350000,
+        // 375000,
+        // 400000,
+        // 425000,
+        // 450000,
+        // 475000,
+        // 500000,
+        // 525000,
+        // 550000,
+        // 575000,
+        // 600000,
+        // 625000,
+        // 650000,
+        // 675000,
+        // 700000,
+        // 725000,
+        // 750000,
+        // 775000,
+        // 800000,
+        // 825000,
+        // 850000,
+        // 875000,
+        // 900000,
+        // 925000,
+        // 950000,
+        // 975000,
+        // 1000000
       ],
       headers: [
         {
@@ -95,29 +95,29 @@ export default {
           sortable: true,
           value: 'noItems'
         },
-        { text: 'Duff\'s Device', value: 'addWithDuffsDevice' },
-        { text: 'forEach', value: 'addWithForEach' },
-        { text: 'For I++', value: 'addWithForI' },
-        { text: 'For I--', value: 'addWithForIOther' },
-        { text: 'For Of', value: 'addWithForOf' },
+        // { text: 'Duff\'s Device', value: 'addWithDuffsDevice' },
+        // { text: 'forEach', value: 'addWithForEach' },
+        // { text: 'For I++', value: 'addWithForI' },
+        // { text: 'For I--', value: 'addWithForIOther' },
+        // { text: 'For Of', value: 'addWithForOf' },
         { text: '$.each()', value: 'addWithJqueryEach' },
         { text: '_.forEach()', value: 'addWithLodashForEach' },
         { text: '_.sumBy()', value: 'addWithLodashSumBy' },
-        { text: 'Reducer', value: 'addWithReducer' },
-        { text: 'While I--', value: 'addWithWhile' }
+        // { text: 'Reducer', value: 'addWithReducer' },
+        // { text: 'While I--', value: 'addWithWhile' }
       ],
       results: [],
       functionNames: [
-        'addWithDuffsDevice',
-        'addWithForEach',
-        'addWithForI',
-        'addWithForIOther',
-        'addWithForOf',
+        // 'addWithDuffsDevice',
+        // 'addWithForEach',
+        // 'addWithForI',
+        // 'addWithForIOther',
+        // 'addWithForOf',
         'addWithJqueryEach',
         'addWithLodashForEach',
         'addWithLodashSumBy',
-        'addWithReducer',
-        'addWithWhile'
+        // 'addWithReducer',
+        // 'addWithWhile'
       ]
     }
   },
@@ -137,7 +137,6 @@ export default {
 
       this.results = []
 
-      const self = this
       const noItemsVector = this.noItemsVector
 
       this.$store.dispatch('setNoRuns', this.noRuns)

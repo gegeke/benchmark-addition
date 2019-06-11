@@ -13,7 +13,7 @@ const state = {
 }
 
 const mutations = {
-  setAdditionalItems(state, data) {
+  setAdditionalItems(state) {
     const lastItem = state.itemData[state.itemData.length - 1] || state.itemTemplate
     const noItems = state.runData.noItems - state.itemData.length
     const startId = lastItem.id || 0
@@ -43,7 +43,7 @@ const mutations = {
 
 const actions = {
   setAdditionalItems({ commit }) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       commit('setAdditionalItems')
       resolve(true)
     })
@@ -55,8 +55,6 @@ const actions = {
     commit('setNoRuns', noRuns)
   }
 }
-
-const plugins = []
 
 export default new Vuex.Store({
   state,
