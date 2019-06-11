@@ -1,4 +1,4 @@
-# addition-vuetify
+# Benchmark addition
 
 ## Project setup
 ```
