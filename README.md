@@ -1,4 +1,4 @@
-# addition-vuetify
+# JAVASCRIPT LOOP BENCHMARK
 
 ## Project setup
 ```
