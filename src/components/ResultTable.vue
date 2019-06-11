@@ -9,7 +9,12 @@
         v-slot:items="results"
       >
         <td>{{ results.item.noItems }}</td>
-        <td v-for="(functionName, index) in functionNames" :key="functionName+index">{{ results.item[functionName] }}</td>
+        <td
+          v-for="(functionName, index) in functionNames"
+          :key="functionName+index"
+        >
+          {{ results.item[functionName] }}
+        </td>
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
@@ -17,10 +22,12 @@
         <template v-slot:activator="{ on }">
           <v-btn
             color="primary"
+            :disabled="isRunning"
             v-on="on"
             @click="runTests"
-            :disabled="isRunning"
-          >Run Benchmark</v-btn>
+          >
+            Run Benchmark
+          </v-btn>
         </template>
         <span>It takes several minutes to run the benchmark.</span>
       </v-tooltip>
@@ -165,6 +172,7 @@ export default {
 
           const avgTime = await this.runCalculation(funcName, this.$store.state.itemData, this.noRuns)
 
+          // eslint-disable-next-line
           console.log(funcName + ' ' + noItemsVector[i] + ':', avgTime)
           tableRow[funcName] = avgTime
 
@@ -180,6 +188,7 @@ export default {
 
         for(let i = 0; i < noRuns; i++) {
           const startTime = Date.now()
+          // eslint-disable-next-line
           const sum = await this[funcName](items, itemsLength)
           const endTime = Date.now()
           calcTimes.push(endTime - startTime)

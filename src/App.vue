@@ -14,12 +14,11 @@
         Running the benchmark process takes time.
       </v-alert>
       <v-container
-      fluid
+        fluid
         grid-list-md
       >
         <result-table />
       </v-container>
-
     </v-content>
     <app-footer />
   </v-app>
