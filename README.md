@@ -1,4 +1,4 @@
-# Benchmark additions
+# Benchmark addition
 
 ## Project setup
 ```
