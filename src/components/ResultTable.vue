@@ -36,7 +36,7 @@
 </template>
 
 <script>
-// import _ from 'lodash'
+import _ from 'lodash'
 import { addSingle as addWithDuffsDevice } from '../functions/WithDuffsDevice'
 import { addSingle as addWithForEach } from '../functions/WithForEach'
 import { addSingle as addWithForI } from '../functions/WithForI'
