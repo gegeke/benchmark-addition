@@ -1,44 +1,41 @@
 <template>
-  <div :key="componentKey">
+  <div>
     <v-data-table
       :headers="headers"
       :items="results"
-      :loading="isRunning"
       class="elevation-1 my-3"
     >
-      <v-progress-linear
-        v-slot:progress
-        color="success"
-        indeterminate
-      ></v-progress-linear>
-      <template v-slot:items="results">
+      <template
+        v-slot:items="results"
+      >
         <td>{{ results.item.noItems }}</td>
-        <td class="text-xs-right">{{ results.item['addWithDuffsDevice'] }}</td>
-        <td class="text-xs-right">{{ results.item['addWithForEach'] }}</td>
-        <td class="text-xs-right">{{ results.item['addWithForI'] }}</td>
-        <td class="text-xs-right">{{ results.item['addWithForIOther'] }}</td>
-        <td class="text-xs-right">{{ results.item['addWithForOf'] }}</td>
-        <td class="text-xs-right">{{ results.item['addWithLodashForEach'] }}</td>
-        <td class="text-xs-right">{{ results.item['addWithLodashSumBy'] }}</td>
-        <td class="text-xs-right">{{ results.item['addWithReducer'] }}</td>
-        <td class="text-xs-right">{{ results.item['addWithWhile'] }}</td>
+        <td v-for="(functionName, index) in functionNames" :key="functionName+index">{{ results.item[functionName] }}</td>
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
-      <v-btn
-        color="primary"
-        @click="runTests"
-      >Run Tests</v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            color="primary"
+            v-on="on"
+            @click="runTests"
+            :disabled="isRunning"
+          >Run Benchmark</v-btn>
+        </template>
+        <span>It takes several minutes to run the benchmark.</span>
+      </v-tooltip>
     </div>
   </div>
 </template>
 
 <script>
+import _ from 'lodash'
 import { addSingle as addWithDuffsDevice } from '../functions/WithDuffsDevice'
 import { addSingle as addWithForEach } from '../functions/WithForEach'
 import { addSingle as addWithForI } from '../functions/WithForI'
 import { addSingle as addWithForIOther } from '../functions/WithForIOther'
 import { addSingle as addWithForOf } from '../functions/WithForOf'
+import { addSingle as addWithJqueryEach } from '../functions/WithJqueryEach'
 import { addSingle as addWithLodashForEach } from '../functions/WithLodashForEach'
 import { addSingle as addWithLodashSumBy } from '../functions/WithLodashSumBy'
 import { addSingle as addWithReducer } from '../functions/WithReducer'
@@ -49,6 +46,7 @@ export default {
   data () {
     return {
       isRunning: false,
+      noRuns: 30,
       noItemsVector: [
         50000,
         75000,
@@ -90,7 +88,6 @@ export default {
         975000,
         1000000
       ],
-      noRuns: 90,
       headers: [
         {
           text: 'Number Of Items',
@@ -103,35 +100,25 @@ export default {
         { text: 'For I++', value: 'addWithForI' },
         { text: 'For I--', value: 'addWithForIOther' },
         { text: 'For Of', value: 'addWithForOf' },
+        { text: '$.each()', value: 'addWithJqueryEach' },
         { text: '_.forEach()', value: 'addWithLodashForEach' },
         { text: '_.sumBy()', value: 'addWithLodashSumBy' },
         { text: 'Reducer', value: 'addWithReducer' },
         { text: 'While I--', value: 'addWithWhile' }
       ],
-      results: [
-        // {
-        //   'noItems': 50000,
-        //   'addWithForI': 159,
-        //   'addWithForIOther': 160,
-        //   'addWithForOf': 161,
-        //   'addWithLodashForEach': 162,
-        //   'addWithLodashSumBy': 163,
-        //   'addWithReducer': 164,
-        //   'addWithWhile': 165,
-        // }
-      ],
+      results: [],
       functionNames: [
         'addWithDuffsDevice',
         'addWithForEach',
-        // 'addWithForI',
-        // 'addWithForIOther',
-        // 'addWithForOf',
-        // 'addWithLodashForEach',
-        // 'addWithLodashSumBy',
-        // 'addWithReducer',
-        // 'addWithWhile'
-      ],
-      componentKey: 'startKey'
+        'addWithForI',
+        'addWithForIOther',
+        'addWithForOf',
+        'addWithJqueryEach',
+        'addWithLodashForEach',
+        'addWithLodashSumBy',
+        'addWithReducer',
+        'addWithWhile'
+      ]
     }
   },
   methods: {
@@ -140,6 +127,7 @@ export default {
     addWithForI,
     addWithForIOther,
     addWithForOf,
+    addWithJqueryEach,
     addWithLodashForEach,
     addWithLodashSumBy,
     addWithReducer,
@@ -182,9 +170,9 @@ export default {
           tableRow[funcName] = avgTime
 
         }
-
         this.results.push(tableRow)
       }
+      this.isRunning = false
     },
     runCalculation(funcName, items, noRuns) {
       return new Promise(async resolve => {

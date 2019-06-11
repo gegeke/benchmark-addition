@@ -6,46 +6,13 @@ Vue.use(Vuex)
 const state = {
   itemTemplate: { id: 1, data1: 10 },
   itemData: [],
-  disableConditions: {
-    settingItem: false,
-  },
   runData: {
     noRuns: 1,
     noItems: 10
   }
 }
 
-const getters = {
-  getRunData: state => {
-    return state.runData
-  },
-  getItemData: state => {
-    return state.itemData
-  },
-  getItemDataLength: state => {
-    return state.itemData.length
-  }
-}
-
 const mutations = {
-  setItems(state, data) {
-    const item = state.itemTemplate
-    const noItems = state.runData.noItems
-    const itemArray = []
-
-    state.disableConditions.settingItem = true
-
-    for (let i = 0; i < noItems; i++) {
-      itemArray.push({
-        id: 0 + i,
-        data1: 10 + i
-      })
-    }
-
-    state.itemData = itemArray
-
-    state.disableConditions.settingItem = false
-  }, // setItems()
   setAdditionalItems(state, data) {
     const lastItem = state.itemData[state.itemData.length - 1] || state.itemTemplate
     const noItems = state.runData.noItems - state.itemData.length
@@ -75,13 +42,6 @@ const mutations = {
 }
 
 const actions = {
-  setItems({ commit }) {
-    return new Promise((resolve, reject) => {
-      commit('setItems')
-      commit('setNoItems')
-      resolve(true)
-    })
-  },
   setAdditionalItems({ commit }) {
     return new Promise((resolve, reject) => {
       commit('setAdditionalItems')
@@ -101,7 +61,5 @@ const plugins = []
 export default new Vuex.Store({
   state,
   mutations,
-  actions,
-  getters,
-  plugins
+  actions
 })

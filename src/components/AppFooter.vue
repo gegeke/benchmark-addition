@@ -9,7 +9,7 @@
       wrap
     >
       <h6 class="text-capitalize title white--text py-3">
-        JAVASCRIPT ADDITION - OPTIMAL METHOD
+        JAVASCRIPT LOOP BENCHMARK
       </h6>
       <v-flex
         primary

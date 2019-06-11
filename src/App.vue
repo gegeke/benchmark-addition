@@ -3,11 +3,16 @@
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
         <span>JAVASCRIPT ADDITION</span>
-        <span class="font-weight-light">OPTIMAL METHOD</span>
+        <span class="font-weight-light">LOOP BENCHMARK</span>
       </v-toolbar-title>
     </v-toolbar>
-
     <v-content>
+      <v-alert
+        :value="true"
+        type="info"
+      >
+        Running the benchmark process takes time.
+      </v-alert>
       <v-container
       fluid
         grid-list-md
@@ -21,7 +26,6 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
 import AppFooter from './components/AppFooter'
 import ResultTable from './components/ResultTable'
 
